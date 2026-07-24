@@ -54,7 +54,7 @@ app.use((err, req, res, next) => {
     error: err.message,
   });
 });
-const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 app.listen(PORT, () => {
   console.log(`Server is start on ${PORT}`);
 });
