@@ -39,7 +39,7 @@ app.get('/notes/:noteId', (req, res) => {
   });
 });
 
-app.get('/test-error', (req, res) => {
+app.get('/test-error', () => {
   throw new Error('Something went wrong');
 });
 
@@ -47,7 +47,7 @@ app.use((_, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   console.error('Error:', err.message);
   res.status(500).json({
     message: 'Internal Server Error',
