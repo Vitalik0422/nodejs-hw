@@ -1,3 +1,4 @@
+import { TAGS } from '../constants/tags.js';
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema(
@@ -6,18 +7,7 @@ const schema = new mongoose.Schema(
     content: { type: String, require: false, trim: true, default: '' },
     tag: {
       type: String,
-      enum: [
-        'Work',
-        'Personal',
-        'Meeting',
-        'Shopping',
-        'Ideas',
-        'Travel',
-        'Finance',
-        'Health',
-        'Important',
-        'Todo',
-      ],
+      enum: TAGS,
       default: 'Todo',
       require: false,
     },
