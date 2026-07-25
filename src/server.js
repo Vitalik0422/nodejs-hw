@@ -18,5 +18,5 @@ app.use(errorHandler);
 const PORT = Number(process.env.PORT) || 3000;
 await connectMongoDB();
 app.listen(PORT, () => {
-  console.log(`Server is start on ${PORT}`);
+  console.log(`Server is started on ${PORT}`);
 });
