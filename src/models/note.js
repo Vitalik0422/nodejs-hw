@@ -3,13 +3,13 @@ import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema(
   {
-    title: { type: String, require: true, trim: true },
-    content: { type: String, require: false, trim: true, default: '' },
+    title: { type: String, required: true, trim: true },
+    content: { type: String, required: false, trim: true, default: '' },
     tag: {
       type: String,
       enum: TAGS,
       default: 'Todo',
-      require: false,
+      required: false,
     },
   },
   { timestamps: true },
