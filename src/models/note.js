@@ -19,7 +19,7 @@ const schema = new mongoose.Schema(
         'Todo',
       ],
       default: 'Todo',
-      require: false,
+      required: false,
     },
   },
   { timestamps: true },
