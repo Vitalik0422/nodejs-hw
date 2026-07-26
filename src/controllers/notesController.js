@@ -26,7 +26,7 @@ export const getNoteById = async (req, res) => {
   const { noteId } = req.params;
   const note = await noteModel.findById(noteId);
   if (!note) throw createHttpError(404, 'The note not found');
-  res.status(200).json(note);
+  res.status(200).json({ note });
 };
 
 export const createNote = async (req, res) => {
