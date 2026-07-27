@@ -3,7 +3,7 @@ import { TAGS } from '../constants/tags.js';
 import { isValidObjectId } from 'mongoose';
 
 const getNotesQuerySchema = Joi.object({
-  search: Joi.string().min(1).max(100).messages({
+  search: Joi.string().max(100).messages({
     'string.base': 'Search must be a string',
     'string.min': 'Search must be at least {#limit} character long',
     'string.max': 'Search must not exceed {#limit} characters',
@@ -22,7 +22,7 @@ const getNotesQuerySchema = Joi.object({
     'number.min': 'Page must be at least {#limit}',
   }),
 
-  perPage: Joi.number().positive().min(5).max(20).messages({
+  perPage: Joi.number().positive().min(5).max(20).default(10).messages({
     'number.base': 'Per page must be a number',
     'number.positive': 'Per page must be a positive number',
     'number.min': 'Per page must be at least {#limit}',
@@ -85,9 +85,9 @@ const updateNoteBodySchema = Joi.object({
     'object.min': 'At least one field must be provided to update',
   });
 
-export const getNotesSchema = { [Segments.QUERY]: getNotesQuerySchema };
+export const getAllNotesSchema = { [Segments.QUERY]: getNotesQuerySchema };
 export const noteIdSchema = { [Segments.PARAMS]: noteIdParamsSchema };
-export const createNotesSchema = { [Segments.BODY]: createNoteBodySchema };
+export const createNoteSchema = { [Segments.BODY]: createNoteBodySchema };
 export const updateNoteSchema = {
   [Segments.PARAMS]: noteIdParamsSchema,
   [Segments.BODY]: updateNoteBodySchema,

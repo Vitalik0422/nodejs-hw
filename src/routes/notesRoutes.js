@@ -1,9 +1,9 @@
 import express from 'express';
 import { celebrate } from 'celebrate';
 import {
-  getNotesSchema,
+  getAllNotesSchema,
   noteIdSchema,
-  createNotesSchema,
+  createNoteSchema,
   updateNoteSchema,
 } from '../validations/notesValidation.js';
 import {
@@ -16,9 +16,9 @@ import {
 
 const notes = express.Router();
 
-notes.get('/notes', celebrate(getNotesSchema), getAllNotes);
+notes.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
 notes.get('/notes/:noteId', celebrate(noteIdSchema), getNoteById);
-notes.post('/notes', celebrate(createNotesSchema), createNote);
+notes.post('/notes', celebrate(createNoteSchema), createNote);
 notes.patch('/notes/:noteId', celebrate(updateNoteSchema), updateNote);
 notes.delete('/notes/:noteId', celebrate(noteIdSchema), deleteNote);
 
