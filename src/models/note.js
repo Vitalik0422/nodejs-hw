@@ -1,5 +1,5 @@
 import { TAGS } from '../constants/tags.js';
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const schema = new mongoose.Schema(
   {
@@ -11,6 +11,7 @@ const schema = new mongoose.Schema(
       index: true,
       default: 'Todo',
     },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   { timestamps: true },
 );
