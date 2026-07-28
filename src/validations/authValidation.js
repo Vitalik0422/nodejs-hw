@@ -43,8 +43,14 @@ const requestResetEmailBodySchema = Joi.object({
   }),
 });
 
+const resetPasswordBodySchema = Joi.object({
+  token: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
 export const registerUserSchema = { [Segments.BODY]: registerUserBodySchema };
 export const loginUserSchema = { [Segments.BODY]: loginUserBodySchema };
 export const requestResetEmailSchema = {
   [Segments.BODY]: requestResetEmailBodySchema,
 };
+export const resetPasswordSchema = { [Segments.BODY]: resetPasswordBodySchema };

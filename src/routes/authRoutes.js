@@ -12,6 +12,7 @@ import {
   loginUserSchema,
   registerUserSchema,
   requestResetEmailSchema,
+  resetPasswordSchema,
 } from '../validations/authValidation.js';
 
 const auth = express.Router();
@@ -25,6 +26,10 @@ auth.post(
   celebrate(requestResetEmailSchema),
   requestResetEmail,
 );
-auth.post('/auth/reset-password', resetPassword);
+auth.post(
+  '/auth/reset-password',
+  celebrate(resetPasswordSchema),
+  resetPassword,
+);
 
 export default auth;
