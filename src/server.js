@@ -9,6 +9,7 @@ import { connectMongoDB } from './db/connectMongoDB.js';
 import { authenticate } from './middleware/authenticate.js';
 import { errors } from 'celebrate';
 import auth from './routes/authRoutes.js';
+import users from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(logger);
 app.use(auth);
 app.use(authenticate, notesRoutes);
+app.use(authenticate, users);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);

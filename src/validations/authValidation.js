@@ -32,5 +32,19 @@ const loginUserBodySchema = Joi.object({
     'any.required': 'Password is required',
   }),
 });
+
+const requestResetEmailBodySchema = Joi.object({
+  email: Joi.string().email().required().messages({
+    'string.base': 'Email must be a string',
+    'string.empty': 'Email cannot be empty',
+
+    'string.email': 'Email must be a valid email address',
+    'any.required': 'Email is required',
+  }),
+});
+
 export const registerUserSchema = { [Segments.BODY]: registerUserBodySchema };
 export const loginUserSchema = { [Segments.BODY]: loginUserBodySchema };
+export const requestResetEmailSchema = {
+  [Segments.BODY]: requestResetEmailBodySchema,
+};
