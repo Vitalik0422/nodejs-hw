@@ -8,12 +8,11 @@ const schema = new mongoose.Schema(
     tag: {
       type: String,
       enum: TAGS,
-      index: true,
-      default: 'Todo',
     },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   { timestamps: true },
 );
 
+schema.index({ tag: 1 });
 export const Note = mongoose.model('Note', schema);
