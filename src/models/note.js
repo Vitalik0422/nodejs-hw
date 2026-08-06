@@ -8,6 +8,7 @@ const schema = new mongoose.Schema(
     tag: {
       type: String,
       enum: TAGS,
+      default: 'Todo',
     },
   },
   { timestamps: true },

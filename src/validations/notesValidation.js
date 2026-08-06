@@ -3,7 +3,7 @@ import { TAGS } from '../constants/tags.js';
 import { isValidObjectId } from 'mongoose';
 
 const getNotesQuerySchema = Joi.object({
-  search: Joi.string().max(100).allow('').messages({
+  search: Joi.string().allow('').messages({
     'string.base': 'Search must be a string',
     'string.min': 'Search must be at least {#limit} character long',
     'string.max': 'Search must not exceed {#limit} characters',
@@ -39,14 +39,13 @@ const createNoteBodySchema = Joi.object({
     'any.required': 'Title is required',
   }),
 
-  content: Joi.string().max(1000).allow('').messages({
+  content: Joi.string().allow('').messages({
     'string.base': 'Content must be a string',
     'string.max': 'Content must not exceed {#limit} characters',
   }),
 
   tag: Joi.string()
     .valid(...TAGS)
-    .default('Work')
     .messages({
       'any.only': `Tag must be one of: ${TAGS.join(', ')}`,
       'string.base': 'Tag must be a string',
