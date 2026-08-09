@@ -39,14 +39,13 @@ const createNoteBodySchema = Joi.object({
     'any.required': 'Title is required',
   }),
 
-  content: Joi.string().max(1000).allow('').messages({
+  content: Joi.string().allow('').max(1000).messages({
     'string.base': 'Content must be a string',
     'string.max': 'Content must not exceed {#limit} characters',
   }),
 
   tag: Joi.string()
     .valid(...TAGS)
-    .default('Work')
     .messages({
       'any.only': `Tag must be one of: ${TAGS.join(', ')}`,
       'string.base': 'Tag must be a string',
