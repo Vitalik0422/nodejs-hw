@@ -39,7 +39,7 @@ const createNoteBodySchema = Joi.object({
     'any.required': 'Title is required',
   }),
 
-  content: Joi.string().allow('').messages({
+  content: Joi.string().allow('').max(1000).messages({
     'string.base': 'Content must be a string',
     'string.max': 'Content must not exceed {#limit} characters',
   }),
