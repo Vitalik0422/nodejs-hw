@@ -13,7 +13,7 @@ import {
   getNoteById,
   updateNote,
 } from '../controllers/notesController.js';
-import { authenticate } from '../middleware/authenticate';
+import { authenticate } from '../middleware/authenticate.js';
 
 const notes = express.Router();
 
