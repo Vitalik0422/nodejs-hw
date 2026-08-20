@@ -39,7 +39,6 @@ export const loginUser = async (req, res) => {
 
 export const refreshUserSession = async (req, res) => {
   const { sessionId, refreshToken } = req.cookies;
-  console.log(sessionId, refreshToken);
   const session = await Session.findOne({ _id: sessionId, refreshToken });
 
   if (!session) throw createHttpError(401, 'Session not found');
