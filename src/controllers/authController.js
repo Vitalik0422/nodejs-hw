@@ -90,7 +90,9 @@ export const requestResetEmail = async (req, res) => {
       subject: 'Reset your password',
       html,
     });
-  } catch {
+  } catch (error) {
+    console.log('SMTP error', error);
+
     throw createHttpError(
       500,
       'Failed to send the email, please try again later.',
@@ -102,8 +104,10 @@ export const requestResetEmail = async (req, res) => {
   });
 };
 export const resetPassword = async (req, res) => {
+  console.log(req.body);
   const { token, password } = req.body;
 
+  console.log('token', token);
   const verifiedToken = jsonwebtoken.verify(
     token,
     process.env.JWT_SECRET,
