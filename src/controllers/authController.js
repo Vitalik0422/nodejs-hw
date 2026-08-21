@@ -59,14 +59,16 @@ export const logoutUser = async (req, res) => {
   const sessionId = req.cookies.sessionId;
   if (sessionId) await Session.findByIdAndDelete(sessionId);
   clearSessionCookies(res);
-  res.status(204).json();
+  res.status(204);
 };
 
 export const requestResetEmail = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email: email });
-  if (!user)
+  if (!user) {
     res.status(200).json({ message: 'Password reset email successfully' });
+    return;
+  }
   const url_token = jsonwebtoken.sign(
     { sub: user._id, email },
     process.env.JWT_SECRET,
@@ -79,7 +81,7 @@ export const requestResetEmail = async (req, res) => {
   const template = handlebars.compile(templateSource);
   const html = template({
     userName: user.username,
-    resetLink: `${process.env.FRONTEND_DOMAIN}/auth/reset-password?token=${url_token}`,
+    resetLink: `${process.env.FRONTEND_DOMAIN}/reset-password?token=${url_token}`,
     expiresIn: '15 хвилин',
   });
 
@@ -103,14 +105,13 @@ export const requestResetEmail = async (req, res) => {
 };
 export const resetPassword = async (req, res) => {
   const { token, password } = req.body;
-  const verifiedToken = jsonwebtoken.verify(
-    token,
-    process.env.JWT_SECRET,
-    (err, verify) => {
-      if (err) throw createHttpError(401, 'Invalid or expired token');
-      return verify;
-    },
-  );
+  let verifiedToken;
+  try {
+    verifiedToken = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+  } catch {
+    throw createHttpError(401, 'Invalid or expired token');
+  }
+
   const user = await User.findOne({
     _id: verifiedToken.sub,
     email: verifiedToken.email,

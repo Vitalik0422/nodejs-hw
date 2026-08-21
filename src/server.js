@@ -8,7 +8,7 @@ import errorHandler from './middleware/errorHandler.js';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import { errors } from 'celebrate';
 import authRoutes from './routes/authRoutes.js';
-import usersRoutes from './routes/userRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(logger);
 app.use(authRoutes);
 app.use(notesRoutes);
-app.use(usersRoutes);
+app.use(userRoutes);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
