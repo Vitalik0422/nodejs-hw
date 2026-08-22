@@ -59,7 +59,7 @@ export const logoutUser = async (req, res) => {
   const sessionId = req.cookies.sessionId;
   if (sessionId) await Session.findByIdAndDelete(sessionId);
   clearSessionCookies(res);
-  res.status(204);
+  res.status(204).end();
 };
 
 export const requestResetEmail = async (req, res) => {
